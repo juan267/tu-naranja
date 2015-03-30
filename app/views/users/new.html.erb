@@ -1,0 +1,33 @@
+<%= simple_form_for(@user, html:{class: "form-signin"}) do |f| %>
+  <%= f.error_notification %>
+
+  <h2>Nuevo Empleado</h2>
+  <div class="form-inputs">
+    <%= f.input :name, required: true  %>
+    <%= f.input :email, required: true, autofocus: true %>
+    <% if can? :managed, Role %>
+      <p>
+        <% Role.all.each do |role| %>
+          <div>
+            <%= label_tag(:role_id, role.name) %>
+            <%= radio_button_tag("user[role_id]", role.id) %>
+          </div>
+        <% end %>
+      </p>
+    <% else %>
+      <%= f.hidden_field :role, value: Role.find_by(name: "Employee").id %>
+    <% end %>
+    <% if @farm_id %>
+      <%= f.hidden_field :farm_id, value: @farm_id %>
+    <% else %>
+      <%= f.hidden_field :farm_id, value: params[:farm_id] %>
+    <% end %>
+    <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @validatable) %>
+    <%= f.input :password_confirmation, required: true %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Sign up" %>
+  </div>
+<% end %>
+

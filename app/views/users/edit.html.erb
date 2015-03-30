@@ -1,0 +1,21 @@
+
+<%= simple_form_for(@user, html: { method: :patch, class: "form-signin" }) do |f| %>
+  <%= f.error_notification %>
+
+  <h2>Edit <%= @user.name.capitalize %></h2>
+
+  <div class="form-inputs">
+    <%= f.input :name, required: true, autofocus: true %>
+
+    <%= f.input :email, required: true, autofocus: true %>
+
+    <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
+    <%= f.input :password_confirmation, required: false %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Update" %>
+  </div>
+<% end %>
+
+<%= link_to "Back", :back %>

@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3>Administradores</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+          <% @employees.each do |employee| %>
+            <% if employee.role?(:farm_admin)%>
+              <li><%= link_to employee.name, user_path(employee) %></li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3>Directos</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+          <% @employees.each do |employee| %>
+            <% if employee.role?(:employee) %>
+              <li><%= link_to employee.name, user_path(employee) %></li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3>Contratistas</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+          <% @employees.each do |employee| %>
+            <% if employee.role?(:subcontract)  %>
+              <li><%= link_to employee.name, user_path(employee) %></li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+ </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <% if can?(:create, User) %>
+      <%= link_to "Crear Empleado", new_user_path(farm_id: @farm) %>
+    <% end %>
+  </div>
+</div>
+
+
