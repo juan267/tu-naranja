@@ -1,15 +1,53 @@
 <div class="row">
   <h2 class="text-center"><%= @sub_lote.name %></h2>
-  <div class="btn-toolbar">
-    <%= link_to "Semana", farm_sub_lote_path(params[:farm_id], @sub_lote, time_frame: "week" ), class: "btn btn-default" %>
-    <%= link_to "Meses", farm_sub_lote_path(params[:farm_id], @sub_lote), class: "btn btn-default" %>
+  <br>
+  <div class="col-md-8 col-md-offset-4 ">
+    <div class="btn-toolbar">
+      <%= link_to "Semanas", farm_sub_lote_path(params[:farm_id], @sub_lote, time_frame: "week" ), class: "btn btn-default " %>
+      <%= link_to "Meses", farm_sub_lote_path(params[:farm_id], @sub_lote), class: "btn btn-default" %>
+      <%= link_to "Años", farm_sub_lote_path(params[:farm_id], @sub_lote, time_frame: "year" ), class: "btn btn-default" %>
+    </div>
   </div>
 </div>
 <div class='row'>
-  <%= @sub_lote.production_reports.sum(:amount) %>
-  <% if @time_frame == "week"  %>
-    <%= line_chart @sub_lote.production_reports.group_by_week(:created_at).sum(:amount) %>
-  <% else %>
-    <%= line_chart @sub_lote.production_reports.group_by_month(:created_at).sum(:amount) %>
-  <% end %>
+  <br>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Resumen</h3>
+      </div>
+      <div class="panel-body">
+        <div class="list-group">
+          <li class="list-group-item"><strong>Produccion ultimo mes:</strong> <%= @sub_lote.last_month_production_amount %> Toneladas</li>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Acciones</h3>
+      </div>
+      <div class="panel-body">
+        <div class="list-group">
+          <%= link_to "Editar Sub-Lote", edit_farm_sub_lote_path(params[:farm_id], @sub_lote), class: "list-group-item" %>
+          <%= link_to "Destruir Sub-Lote", farm_sub_lote_path(params[:farm_id], @sub_lote), class: "list-group-item", method: :delete, data: {confirm:"Esta seguro de destruir lote"} %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8 ">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h3 class="panel-title">Curva de Produccion</h3>
+      </div>
+      <div class="panel-body">
+        <% if @time_frame == "week"  %>
+          <%= line_chart @sub_lote.production_reports.group_by_week(:created_at).sum(:amount), class: "pull-left" %>
+        <% elsif @time_frame == "year" %>
+          <%= line_chart @sub_lote.production_reports.group_by_year(:created_at).sum(:amount) %>
+        <% else %>
+          <%= line_chart @sub_lote.production_reports.group_by_month(:created_at).sum(:amount) %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

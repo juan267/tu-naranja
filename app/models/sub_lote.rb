@@ -6,4 +6,9 @@ class SubLote < ActiveRecord::Base
   validates :plantation_date, presence: true
   validates :code, presence: true
   validates :tree_count, presence: true
+
+  def last_month_production_amount
+    self.production_reports.where('created_at BETWEEN ? AND ?', DateTime.now.in_time_zone.beginning_of_month, DateTime.now.in_time_zone.end_of_month).sum(:amount)
+  end
+
 end

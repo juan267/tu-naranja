@@ -47,3 +47,12 @@ ProductionReport.create!(amount: 6, sub_lote_id: 1, created_at: Date.today.weeks
 ProductionReport.create!(amount: 2, sub_lote_id: 1, created_at: Date.today.weeks_ago(2))
 ProductionReport.create!(amount: 7, sub_lote_id: 1, created_at: Date.today.weeks_ago(1))
 ProductionReport.create!(amount: 7, sub_lote_id: 1, created_at: Date.today)
+
+ProductionReport.create!(amount: 2, sub_lote_id: 1, created_at: Date.today.months_ago(4))
+ProductionReport.create!(amount: 4, sub_lote_id: 1, created_at: Date.today.months_ago(4))
+ProductionReport.create!(amount: 2, sub_lote_id: 1, created_at: Date.today.months_ago(3))
+ProductionReport.create!(amount: 5, sub_lote_id: 1, created_at: Date.today.months_ago(3))
+ProductionReport.create!(amount: 6, sub_lote_id: 1, created_at: Date.today.months_ago(3))
+ProductionReport.create!(amount: 2, sub_lote_id: 1, created_at: Date.today.months_ago(2))
+ProductionReport.create!(amount: 7, sub_lote_id: 1, created_at: Date.today.months_ago(1))
+ProductionReport.create!(amount: 7, sub_lote_id: 1, created_at: Date.today)
