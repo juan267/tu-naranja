@@ -1,6 +1,6 @@
 class LotesController < ApplicationController
-  skip_authorize_resource :only => :new
-  load_and_authorize_resource :only => [:show,:destroy,:edit,:update]
+  # skip_authorize_resource :only => :new
+  load_and_authorize_resource :only => [:show,:destroy,:edit,:update, :new]
 
   def index
     @farm = Farm.find(params[:farm_id])

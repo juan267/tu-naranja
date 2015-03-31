@@ -3,7 +3,7 @@ class CreateSubLotes < ActiveRecord::Migration
     create_table :sub_lotes do |t|
       t.string :name
       t.string :code
-      t.integer :age
+      t.date :plantation_date
       t.integer :tree_count
       t.string :fruit_variety
       t.belongs_to :lote, index: true

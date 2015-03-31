@@ -31,4 +31,4 @@ Task.create!(title: "Terminada", user_id: 2, status: 100, priority: 1)
 Lote.create!(name: "Cañaveral", size: 20.2, farm_id: 1, fruit_type: "Naranja" )
 
 # Create Sub Lotes
-SubLote.create!(name: "lote1a", code: "1asub1", age: 1, tree_count: 300, lote_id: 1, fruit_variety: "Sweety")
+SubLote.create!(name: "lote1a", code: "1asub1", plantation_date: Date.yesterday, tree_count: 300, lote_id: 1, fruit_variety: "Sweety")

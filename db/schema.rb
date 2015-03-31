@@ -41,12 +41,12 @@ ActiveRecord::Schema.define(version: 20150330222800) do
   create_table "sub_lotes", force: :cascade do |t|
     t.string   "name"
     t.string   "code"
-    t.integer  "age"
+    t.date     "plantation_date"
     t.integer  "tree_count"
     t.string   "fruit_variety"
     t.integer  "lote_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   add_index "sub_lotes", ["lote_id"], name: "index_sub_lotes_on_lote_id", using: :btree

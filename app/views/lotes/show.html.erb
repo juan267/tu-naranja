@@ -27,18 +27,20 @@
         <%= @lote.sub_lotes.count %>
       </div>
     </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Acciones</h3>
-      </div>
-      <div class="panel-body">
-        <div class="list-group">
-          <%= link_to "Editar Lote", edit_farm_lote_path(@lote.farm, @lote), class: "list-group-item" %>
-          <%= link_to "Destruir Lote", farm_lote_path(@lote.farm, @lote), class: "list-group-item", method: :delete %>
-          <%= link_to "Crear Sub Lote", new_farm_sub_lote_path(@lote.farm), class: "list-group-item" %>
+    <% if can?(:manage, Lote) %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Acciones</h3>
+        </div>
+        <div class="panel-body">
+          <div class="list-group">
+            <%= link_to "Editar Lote", edit_farm_lote_path(@lote.farm, @lote), class: "list-group-item" %>
+            <%= link_to "Destruir Lote", farm_lote_path(@lote.farm, @lote), class: "list-group-item", method: :delete %>
+            <%= link_to "Crear Sub Lote", new_farm_sub_lote_path(@lote.farm, lote_id: @lote.id), class: "list-group-item" %>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
   </div>
   <div class="col-md-8">
     <div class="panel panel-default">
@@ -61,7 +63,7 @@
               <td><%= link_to sub_lote.name, farm_sub_lote_path(@lote.farm, sub_lote) %></td>
               <td><%= sub_lote.code %></td>
               <td><%= sub_lote.tree_count %></td>
-              <td><%= sub_lote.age %></td>
+              <td><%= time_ago_in_words(sub_lote.plantation_date) %></td>
               <td><%= sub_lote.fruit_variety %></td>
             </tr>
           <% end %>
