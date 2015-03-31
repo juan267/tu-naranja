@@ -2,6 +2,9 @@ class SubLotesController < ApplicationController
   skip_authorize_resource :only => :new
   load_and_authorize_resource :only => [:show,:destroy,:edit,:update]
 
+  def show
+  end
+
   def new
     @sub_lote = SubLote.new
   end

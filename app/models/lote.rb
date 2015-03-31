@@ -4,4 +4,10 @@ class Lote < ActiveRecord::Base
   validates :name, presence: true
   validates :size, presence: true
   validates :fruit_type, presence: true
+
+
+  def tree_count
+    self.sub_lotes.sum(:tree_count)
+  end
+
 end

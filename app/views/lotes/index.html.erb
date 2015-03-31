@@ -50,4 +50,10 @@
     </div>
   </div>
 </div>
+<div class="row">
+  <div class="col-md-8 pull-right">
+    <%= pie_chart @lotes.group(:fruit_type).count %>
+  </div>
+</div>
+
 <%= link_to "Atras", :back %>
