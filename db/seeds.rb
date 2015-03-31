@@ -7,9 +7,9 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # Create Roles
-admin = Role.create!(name:"Admin")
-farm_admin = Role.create!(name:"FarmAdmin")
-employee = Role.create!(name:"Employee")
+Role.create!(name:"Admin")
+Role.create!(name:"FarmAdmin")
+Role.create!(name:"Employee")
 
 # Create Farms
 Farm.create!(name: "La valenciana", admin_id: 1)
@@ -29,6 +29,21 @@ Task.create!(title: "Terminada", user_id: 2, status: 100, priority: 1)
 
 # Create Lotes
 Lote.create!(name: "Cañaveral", size: 20.2, farm_id: 1, fruit_type: "Naranja" )
+Lote.create!(name: "Lote1", size: 25, farm_id: 1, fruit_type: "Limon" )
+Lote.create!(name: "Pirineos", size: 10.2, farm_id: 1, fruit_type: "Papaya" )
+Lote.create!(name: "Theran", size: 5.2, farm_id: 1, fruit_type: "Naranja" )
 
 # Create Sub Lotes
-SubLote.create!(name: "lote1a", code: "1asub1", plantation_date: Date.yesterday, tree_count: 300, lote_id: 1, fruit_variety: "Sweety")
+SubLote.create!(name: "lote1a", code: "1asub1", plantation_date: Date.yesterday, tree_count: 340, lote_id: 1, fruit_variety: "Sweety")
+SubLote.create!(name: "lote1b", code: "1asub2", plantation_date: Date.yesterday, tree_count: 200, lote_id: 1, fruit_variety: "Valencia")
+SubLote.create!(name: "lote1c", code: "1asub2", plantation_date: Date.yesterday, tree_count: 100, lote_id: 1, fruit_variety: "Salustiana")
+
+#Create Production Reports
+ProductionReport.create!(amount: 2, sub_lote_id: 1, created_at: Date.today.weeks_ago(4))
+ProductionReport.create!(amount: 4, sub_lote_id: 1, created_at: Date.today.weeks_ago(4))
+ProductionReport.create!(amount: 2, sub_lote_id: 1, created_at: Date.today.weeks_ago(3))
+ProductionReport.create!(amount: 5, sub_lote_id: 1, created_at: Date.today.weeks_ago(3))
+ProductionReport.create!(amount: 6, sub_lote_id: 1, created_at: Date.today.weeks_ago(3))
+ProductionReport.create!(amount: 2, sub_lote_id: 1, created_at: Date.today.weeks_ago(2))
+ProductionReport.create!(amount: 7, sub_lote_id: 1, created_at: Date.today.weeks_ago(1))
+ProductionReport.create!(amount: 7, sub_lote_id: 1, created_at: Date.today)

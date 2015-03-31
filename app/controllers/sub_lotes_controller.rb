@@ -3,6 +3,7 @@ class SubLotesController < ApplicationController
   load_and_authorize_resource :only => [:show,:destroy,:edit,:update]
 
   def show
+    @time_frame = params[:time_frame]
   end
 
   def new

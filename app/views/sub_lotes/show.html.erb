@@ -1,5 +1,15 @@
 <div class="row">
   <h2 class="text-center"><%= @sub_lote.name %></h2>
+  <div class="btn-toolbar">
+    <%= link_to "Semana", farm_sub_lote_path(params[:farm_id], @sub_lote, time_frame: "week" ), class: "btn btn-default" %>
+    <%= link_to "Meses", farm_sub_lote_path(params[:farm_id], @sub_lote), class: "btn btn-default" %>
+  </div>
 </div>
 <div class='row'>
+  <%= @sub_lote.production_reports.sum(:amount) %>
+  <% if @time_frame == "week"  %>
+    <%= line_chart @sub_lote.production_reports.group_by_week(:created_at).sum(:amount) %>
+  <% else %>
+    <%= line_chart @sub_lote.production_reports.group_by_month(:created_at).sum(:amount) %>
+  <% end %>
 </div>
