@@ -1,0 +1,51 @@
+<div class="row">
+  <h2 class="text-center">Lotes <%= @farm.name %></h2>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Cantidad de Lotes</h3>
+      </div>
+      <div class="panel-body">
+        <%= @lotes.count %>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Acciones</h3>
+      </div>
+      <div class="panel-body">
+        <div class="list-group">
+          <%= link_to "Crear nuevo Lote", new_farm_lote_path(@farm), class: "list-group-item" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Lotes</h3>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Tamaño</th>
+            <th>Fruta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @lotes.each do |lote| %>
+            <tr>
+              <td><%= link_to lote.name, farm_lote_path(@farm, lote) %></td>
+              <td><%= lote.size %></td>
+              <td><%= lote.fruit_type %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<%= link_to "Atras", :back %>

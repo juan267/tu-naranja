@@ -23,8 +23,12 @@ User.create!(name: "Arley", email: "b@b.com", password: "foobar12", password_con
 User.create!(name: "Dorita", email: "c@c.com", password: "foobar12", password_confirmation: "foobar12", farm_id: 1, role_id: 3)
 
 # Crate Tasks
-
-#Create Activities
 Task.create!(title: "Sin empezar",  user_id: 2,priority: 1)
 Task.create!(title: "En proceso", user_id: 2, status: 50, priority: 1)
 Task.create!(title: "Terminada", user_id: 2, status: 100, priority: 1)
+
+# Create Lotes
+Lote.create!(name: "Cañaveral", size: 20.2, farm_id: 1, fruit_type: "Naranja" )
+
+# Create Sub Lotes
+SubLote.create!(name: "lote1a", code: "1asub1", age: 1, tree_count: 300, lote_id: 1, fruit_variety: "Sweety")

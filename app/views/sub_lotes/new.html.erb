@@ -1,0 +1,18 @@
+<%= simple_form_for(@sub_lote, url: farm_sub_lotes_path(params[:farm_id]),html:{class: "form-signin"}) do |f| %>
+  <%= f.error_notification %>
+
+  <h2>Nuevo Lote</h2>
+
+  <div class="form-inputs">
+    <%= f.input :name, required: true %>
+    <%= f.input :size, required: true %>
+    <%= f.input :fruit_type, required: true %>
+    <%= f.hidden_field :farm_id, value: params[:farm_id] %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Sign up" %>
+  </div>
+  <%= link_to "Atras", :back %>
+
+<% end %>

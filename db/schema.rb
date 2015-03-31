@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150330144707) do
+ActiveRecord::Schema.define(version: 20150330222800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,11 +23,33 @@ ActiveRecord::Schema.define(version: 20150330144707) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "lotes", force: :cascade do |t|
+    t.string   "name"
+    t.float    "size"
+    t.string   "fruit_type"
+    t.integer  "farm_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "sub_lotes", force: :cascade do |t|
+    t.string   "name"
+    t.string   "code"
+    t.integer  "age"
+    t.integer  "tree_count"
+    t.string   "fruit_variety"
+    t.integer  "lote_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "sub_lotes", ["lote_id"], name: "index_sub_lotes_on_lote_id", using: :btree
 
   create_table "tasks", force: :cascade do |t|
     t.string   "title",                   null: false

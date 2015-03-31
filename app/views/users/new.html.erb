@@ -15,7 +15,7 @@
         <% end %>
       </p>
     <% else %>
-      <%= f.hidden_field :role, value: Role.find_by(name: "Employee").id %>
+      <%= f.hidden_field :role_id, value: Role.find_by(name: "Employee").id %>
     <% end %>
     <% if @farm_id %>
       <%= f.hidden_field :farm_id, value: @farm_id %>
@@ -29,5 +29,7 @@
   <div class="form-actions">
     <%= f.button :submit, "Sign up" %>
   </div>
+
+  <%= link_to "Back", :back %>
 <% end %>
 

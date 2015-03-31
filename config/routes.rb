@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   resources :farms do
     resources :employees, only: [:index]
+    resources :lotes
+    resources :sub_lotes
   end
 
   root "static_pages#home"
