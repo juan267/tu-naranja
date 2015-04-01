@@ -1,0 +1,19 @@
+<%= simple_form_for(@sub_lote, url: farm_sub_lote_path(params[:farm_id], @sub_lote), html: {class: "form-signin"}, method: :patch) do |f| %>
+  <%= f.error_notification %>
+
+  <h2>Editar <%= @sub_lote.name %></h2>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :code %>
+    <%= f.input :tree_count %>
+    <%= f.input :fruit_variety %>
+    <%= f.input :plantation_date %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Editar Sub-Lote" %>
+  </div>
+  <%= link_to "Atras", :back %>
+
+<% end %>

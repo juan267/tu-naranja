@@ -1,0 +1,32 @@
+<div class="row">
+  <h2 class="text-center">Sub-lotes de <%= @farm.name  %></h2>
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Sub-Lotes</h3>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Codigo</th>
+            <th>Arboles</th>
+            <th>Edad</th>
+            <th>Variedad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @sub_lotes.each do |sub_lote| %>
+            <tr>
+              <td><%= link_to sub_lote.name, farm_sub_lote_path(params[:farm_id], sub_lote) %></td>
+              <td><%= sub_lote.code %></td>
+              <td><%= sub_lote.tree_count %></td>
+              <td><%= time_ago_in_words(sub_lote.plantation_date) %></td>
+              <td><%= sub_lote.fruit_variety %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
