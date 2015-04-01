@@ -4,7 +4,7 @@ class LotesController < ApplicationController
 
   def index
     @farm = Farm.find(params[:farm_id])
-    @lotes = Lote.where(farm_id: params[:farm_id])
+    @lotes = @farm.lotes
   end
 
   def show

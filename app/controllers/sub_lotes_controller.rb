@@ -1,6 +1,11 @@
 class SubLotesController < ApplicationController
-  skip_authorize_resource :only => :new
   load_and_authorize_resource :only => [:show,:destroy,:edit,:update]
+
+
+  def index
+    @farm = Farm.find(params[:farm_id])
+    @sub_lotes = @farm.sub_lotes
+  end
 
   def show
     @time_frame = params[:time_frame]
@@ -20,6 +25,25 @@ class SubLotesController < ApplicationController
       @lote_id = @sub_lote.lote.id
       render :new
     end
+  end
+
+  def edit
+  end
+
+  def update
+    @sub_lote = SubLote.find(params[:id])
+    if @sub_lote.update(sub_lote_params)
+      flash[:success] = "Sub-Lote Exitosamente Editado"
+      redirect_to farm_sub_lote_path(@sub_lote.lote.farm, @sub_lote)
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @sub_lote.destroy!
+    flash[:success] = "Sub-Lote Destruido"
+    redirect_to farm_lote_path(@sub_lote.lote.farm, @sub_lote.lote)
   end
 
   private

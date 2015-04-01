@@ -1,5 +1,6 @@
 class SubLote < ActiveRecord::Base
   belongs_to :lote
+  belongs_to :farm
   has_many :production_reports
   validates :name, presence: true
   validates :fruit_variety, presence: true
