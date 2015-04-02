@@ -20,7 +20,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @tasks = @user.tasks
+    @task = Task.new
+    @tasks = @user.tasks.order(created_at: :desc)
     rescue ActiveRecord::RecordNotFound
       respond_to_not_found(:json, :xml, :html)
   end

@@ -1,24 +1,57 @@
 <div class="row">
-  <div class="col-md-12">
-    <h2 class="text-center">
-      <%= @user.name %>
-    </h2>
-    <h4>Empleado Desde: <%= @user.created_at.to_date.to_formatted_s(:long_ordinal) %></h4>
-    <h4>Rol: <%= @user.role.name %></h4>
-    <% if can?(:update, User) %>
-      <% unless @user.role?(:farm_admin) && current_user.role?(:farm_admin) %>
-        <h4><%= link_to "Editar", edit_user_path(@user) %></h4>
-      <% end %>
-    <% end %>
-    <% if can?(:destroy, User) %>
-      <% unless @user.role?(:farm_admin) && current_user.role?(:farm_admin) %>
-        <h4><%= link_to "Borrar", user_path(@user),method: :delete %></h4>
-      <% end %>
-    <% end %>
-  </div>
+ <div class="col-md-4">
+  <h2>
+      <%= @user.name.capitalize %>
+  </h2>
+ </div>
+ <div class="col-md-8">
+  <h2>
+      Actividades
+  </h2>
+ </div>
 </div>
 <div class="row">
   <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Descripccion</h3>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Empleado desde</th>
+            <th>Rol</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @user.created_at.to_date.to_formatted_s(:long_ordinal) %></td>
+            <td><%= @user.role.name %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Acciones</h3>
+      </div>
+      <div class="panel-body">
+        <div class="list-group">
+        <% if can?(:update, User) %>
+          <% unless @user.role?(:farm_admin) && current_user.role?(:farm_admin) %>
+            <%= link_to "Editar", edit_user_path(@user), class: "list-group-item" %>
+          <% end %>
+        <% end %>
+        <% if can?(:destroy, User) %>
+          <% unless @user.role?(:farm_admin) && current_user.role?(:farm_admin) %>
+            <%= link_to "Borrar", user_path(@user),method: :delete, class: "list-group-item" %>
+          <% end %>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">
@@ -26,17 +59,15 @@
         </h3>
         <div class="panel-body">
           <div class="list-gruop" id="sin-empezar">
-            <% @tasks.each do |activity| %>
-              <% if activity.status == 0 %>
-                <%= render activity %>
+            <% @tasks.each do |task| %>
+              <% if task.status == 0 %>
+                <%= render task %>
               <% end %>
             <% end %>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-4">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">
@@ -44,16 +75,15 @@
         </h3>
         <div class="panel-body">
           <div class="list-gruop" id="sin-empezar">
-            <% @tasks.each do |activity| %>
-              <% if activity.status.between?(1,99) %>
-                <%= render activity %>
+            <% @tasks.each do |task| %>
+              <% if task.status.between?(1,99) %>
+                <%= render task %>
               <% end %>
             <% end %>
           </div>
         </div>
       </div>
     </div>
-  </div>  <div class="col-md-4">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">
@@ -61,14 +91,47 @@
         </h3>
         <div class="panel-body">
           <div class="list-gruop" id="sin-empezar">
-            <% @tasks.each do |activity| %>
-              <% if activity.status == 100 %>
-                <%= render activity %>
+            <% @tasks.each do |task| %>
+              <% if task.status == 100 %>
+                <%= render task %>
               <% end %>
             <% end %>
           </div>
         </div>
       </div>
     </div>
-  </div>
+    <button class="btn btn-default" type="button" data-toggle="modal" data-target="#new-task-modal">Crear nueva Actividad
+    </button>
+ </div>
 </div>
+
+<!-- New Activity modal  -->
+<%= simple_form_for([@user, @task]) do |f| %>
+  <div class="modal fade"  tabindex="-1" id="new-task-modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Nueva Actividad</h4>
+        </div>
+        <div class="modal-body">
+          <%= f.error_notification %>
+          <div class="form-inputs">
+            <%= f.input :title, :validate => true %>
+            <%= f.input :description %>
+            <%= f.input :priority, collection: ["Baja", "Media", "Alta"], class: "task_priority" %>
+            <%= f.hidden_field :user_id, value: @user.id %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="form-actions">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            <%= f.button :submit, "Asignar Actividad" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+

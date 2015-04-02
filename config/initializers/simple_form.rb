@@ -15,6 +15,7 @@ SimpleForm.setup do |config|
 
     # Determines whether to use HTML5 (:email, :url, ...)
     # and required attributes
+    b.use :judge
     b.use :html5
 
     # Calculates placeholders automatically from I18n

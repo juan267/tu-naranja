@@ -3,8 +3,11 @@ class Ability
 
   def initialize(user)
     user ||= User.new
+    can :access, :rails_admin   # grant access to rails_admin
     if user.role? :admin
         can :manage, :all
+        can :access, :rails_admin   # grant access to rails_admin
+        can :dashboard
     elsif user.role? :farm_admin
         can :read, Farm
         can :manage, User
