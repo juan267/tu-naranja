@@ -117,8 +117,8 @@
         <div class="modal-body">
           <%= f.error_notification %>
           <div class="form-inputs">
-            <%= f.input :title, :validate => true %>
-            <%= f.input :description %>
+            <%= f.input :title %>
+            <%= f.input :description, required: true %>
             <%= f.input :priority, collection: ["Baja", "Media", "Alta"], class: "task_priority" %>
             <%= f.hidden_field :user_id, value: @user.id %>
           </div>
@@ -133,5 +133,4 @@
     </div>
   </div>
 <% end %>
-
 

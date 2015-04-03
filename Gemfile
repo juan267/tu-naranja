@@ -17,7 +17,6 @@ gem 'cancan'
 gem 'rails_admin'
 gem 'pg'
 gem 'simple_form'
-gem 'judge-simple_form'
 gem "chartkick"
 gem 'groupdate', '~> 2.1.1'
 gem 'active_median', '~> 0.1.0'

@@ -6,7 +6,7 @@ class TasksController < ApplicationController
       redirect_to user_path(@task.user)
     else
       flash[:danger] = "No fue posible crear actividad  debido a los siguientes errores:"
-      @task.errors.full_messages.each do |message|
+      @task.errors.messages.each do |message|
         flash[:warning] = "Activity: #{message}"
       end
       redirect_to user_path(@task.user)
